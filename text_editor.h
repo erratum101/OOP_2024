@@ -5,27 +5,34 @@
 #include <vector>
 
 class editfun {
-public:
-    enum Type { INSERT, DELETE };
+    public:
+        enum Type { INSERT, DELETE };
 
-    editfun(Type type, const std::string& text, size_t position);
+        editfun();
+        editfun(Type type, const std::string& text, size_t position);
+        editfun(const editfun& other);
 
-    Type get_type() const;
-    const std::string& get_text() const;
-    size_t get_position() const;
+        Type getType() const;
+        const std::string& getText() const;
+        size_t getPosition() const;
 
-private:
-    Type type_;
-    std::string text_;
-    size_t position_;
+        void setType(Type type);
+        void setText(const std::string& text);
+        void setPosition(size_t position);
+
+    private:
+        Type type_;
+        std::string text_;
+        size_t position_;
 };
 
 class textedit {
 public:
     textedit();
+    textedit(const textedit& other);
 
-    void insert(const std::string& text, size_t position);
-    void deletet(size_t start, size_t end);
+    void insertText(const std::string& text, size_t position);
+    void deleteText(size_t start, size_t end);
     void undo();
     void redo();
     const std::string& getText() const;
@@ -36,4 +43,5 @@ private:
     std::vector<editfun> redoStack_;
 };
 
-#endif
+
+#endiff
